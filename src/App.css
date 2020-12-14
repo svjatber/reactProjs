@@ -1,38 +1,90 @@
-.App {
-  text-align: center;
+.wrapper {
+    display: grid;
+
+    grid-template-areas: 'block1 block2'
+                         'block3 block3';
+    background-color: #5C33FF;
+}
+.homeBlock, .mainBlock{
+    background-color: #5C33FF;
+
+}
+.mainBlock{
+    padding: 20px;
+    font-family: "Comic Sans MS", sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+}
+.mainBlock span{
+    color: aliceblue;
+    margin-right:10px ;
+}
+.homeBlock img{
+    display: block;
+    margin: 0 auto;
+
+}
+.block1{
+    grid-area: block1;
+    background-color: aliceblue;
+    min-width: 500px;
+    min-height: 600px;
+    border-radius: 20px;
+    margin: 100px auto;
+}
+.block2{
+    grid-area: block2;
+    min-width: 500px;
+    min-height: 400px;
+    border-radius: 20px;
+    margin: 100px auto;
+}
+.block3{
+    grid-area: block3;
+    background-color: aliceblue;
+    max-width: 800px;
+    max-height: 1200px;
+    border-radius: 20px;
+    margin: 100px auto;
+}
+.userBlock, .emailBlock, .postBlock{
+    margin: 20px;
+    font-family: "Comic Sans MS", sans-serif;
+    font-size: 20px;
+
+}
+.userBlock button, .postBlock button{
+    font-family: "Comic Sans MS", sans-serif;
+    display: inline-block;
+    margin-right: 20px;
+    background: #745ECF;
+    color: aliceblue;
+    box-shadow: none;
+    width: 5rem;
+    height: 2.5rem;
+    font-size: 20px;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.userBlock span{
+    display: inline-block;
+    color: #745ECF;
+    text-decoration: none;
+    box-shadow: none;
+
+}
+.emailBlock{
+    padding: 20px;
+    background: aliceblue;
+    margin: 0;
+    border-radius: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.userBlock button:hover, .postBlock button:hover, .userBlock span:hover{
+    transition: 2s;
+    text-decoration: underline;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
