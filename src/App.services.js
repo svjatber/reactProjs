@@ -1,19 +1,22 @@
 export class AppServices{
-    url = 'https://jsonplaceholder.typicode.com/users'
-    urlPosts = 'https://jsonplaceholder.typicode.com/posts?userId='
+    url = 'https://swapi.dev/api'
 
-
-    getUser(){
-        return fetch(this.url).then(value => value.json()).then(v => v);
+    getFilms(){
+        return fetch(`${this.url}/films`).then(v=>v.json()).then(v=>v.results);
     }
 
-    choosePosts(id){
-        return fetch(this.urlPosts + id).then(value => value.json()).then(v => v)
+    getPlanets(){
+        return fetch(`${this.url}/planets`).then(v=>v.json()).then(v=>v.results);
     }
 
-    getEmail(id){
-        return fetch(this.url + '/' + id).then(value => value.json()).then(v => v)
+    getSpecies(){
+        return fetch(`${this.url}/species`).then(v=>v.json()).then(v=>v.results);
     }
+
+    getPeople(){
+        return fetch(`${this.url}/people`).then(v=>v.json()).then(v=>v.results);
+    }
+
 
 
 }

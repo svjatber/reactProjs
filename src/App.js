@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 
 import  { Switch, Route, withRouter, NavLink} from "react-router-dom";
-import AllUser from "./AllUsers/AllUser";
-import Home from "./Home/Home";
+import Films from "./components/films";
+import Planets from "./components/planets";
+import Species from "./components/species";
+import People from "./components/people";
+
+
 
 class App extends Component {
 
@@ -13,16 +17,27 @@ class App extends Component {
     return (
         <div className='mainBlock'>
 
-        <NavLink to={'/users'}><span>Users</span></NavLink>
-            <NavLink to={'/home'}><span>Home</span></NavLink>
-        <Switch>
-            <Route path={'/users'} render={(props)=>{
-                return <AllUser props={props}/>
-            }} />
-            <Route path={'/home'} render={()=>{
-                return <Home />
-            }} />
-        </Switch>
+            <NavLink to={'/films'}>Films </NavLink>
+            <NavLink to={'/planets'}>Planets</NavLink>
+            <NavLink to={'/species'}>Species</NavLink>
+            <NavLink to={'/people'}>People</NavLink>
+
+
+            <Switch>
+                <Route path={'/films'}  exact={true} render={()=>{
+                    return <Films />
+                }}/>
+                <Route path={'/planets'}  exact={true} render={()=>{
+                    return <Planets />
+                }}/>
+                <Route path={'/species'}  exact={true} render={()=>{
+                    return <Species />
+                }}/>
+                <Route path={'/people'}  exact={true} render={()=>{
+                    return <People />
+                }}/>
+            </Switch>
+
     </div>
 
     );
