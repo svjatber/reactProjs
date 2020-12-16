@@ -7,7 +7,8 @@ class Forms extends Component {
     state = {
         value0: '',
         user: null,
-        error: ''
+        error: '',
+        load: ''
 
     }
 
@@ -19,8 +20,12 @@ class Forms extends Component {
         let {value0} = this.state
         this.service.getUserById(+value0)
             .then(user =>{
-                console.log(user)
-                this.setState({user})
+                this.setState({load: 'loading'})
+                setTimeout(()=>{
+                    console.log(user)
+                    this.setState({user})
+                    this.setState({load: ''})
+                }, 3000)
             })
             .catch((err)=> this.onError(err))
     }
@@ -29,7 +34,7 @@ class Forms extends Component {
     }
 
     render() {
-        const {value0,user,error} = this.state
+        const {value0,user,error,load} = this.state
         return (
 
             <div>
@@ -37,7 +42,7 @@ class Forms extends Component {
                     <input type="text" value={value0} onChange={this.changeValueInput}/>
                     <button>Add</button>
                 </form>
-            <div>{user ? user.name : error}</div>
+            <div>{user ? user.name : error}<p>{load}</p></div>
 
 
             </div>
