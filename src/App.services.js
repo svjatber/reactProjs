@@ -1,8 +1,8 @@
 export class AppServices{
     url = 'https://swapi.dev/api'
 
-    getFilms(){
-        return fetch(`${this.url}/films`).then(v=>v.json()).then(v=>v.results);
+    async getFilms(){
+        return await fetch(`${this.url}/films`).then(v=>v.json()).then(v=>v.results);
     }
 
     getPlanets(){
@@ -17,6 +17,9 @@ export class AppServices{
         return fetch(`${this.url}/people`).then(v=>v.json()).then(v=>v.results);
     }
 
+    getUser(){
+        return fetch('https://jsonplaceholder.typicode.com/users/1').then(v=>v.json())
+    }
 
 
 }
