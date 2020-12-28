@@ -2,53 +2,24 @@
 //userMemo
 //userCallback
 //memo
-import React, {memo, useCallback, useMemo, useState} from "react"
 
-const Test = memo(()=>{
-    console.log('was render')
-    return (<div>
-            <h1>CLICKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK</h1>
-
-    </div>
-
-    )
-})
+import {useDispatch, useSelector} from "react-redux";
 
 
 export default function App() {
-    const [counter, setCounter] = useState(0)
-    const [counter0, setCounter0]= useState([2,4,3,5,3,2,3,5,7,2,14])
-
-
-    const HandlerClick = useCallback(()=>{
-        console.log('test')
-    },[] )
-
-    const Sort = () => {
-        const counter = [...counter0]
-        counter.sort((a,b) => {
-            return a - b
-        } )
-       setCounter0(counter)
-
-    }
+    const storeCounter = useSelector(({counter}) => counter)
+    const dispatch = useDispatch()
+    const inc = () => dispatch({type: 'INC_COUNTER'})
+    const dec = () => dispatch({type: 'DEC_COUNTER'})
+    const res = () => dispatch({type: 'RESET_COUNTER'})
 
     return (
         <div>
-
+            <h1>{storeCounter}</h1>
             <h2>Hello</h2>
-            <h3>{counter}</h3>
-            <button onClick={()=> setCounter( prev => prev + 1)}>Click</button>
-            <Test onClick={HandlerClick}/>
-            {
-                counter0.map((value) =>{
-                    return (
-                        <h1>{value}</h1>
-                    )
-                } )
-            }
-            <button onClick={Sort}>Sort</button>
-            <button onClick={()=>setCounter0([])}>Reset</button>
+            <button onClick={inc}>inc</button>
+            <button onClick={dec}>dec</button>
+            <button onClick={res}>reset</button>
         </div>
     );
 }
