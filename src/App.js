@@ -1,48 +1,54 @@
-import React, {Component} from 'react';
 
-import  { Switch, Route, withRouter, NavLink} from "react-router-dom";
-import Films from "./components/films";
-import Planets from "./components/planets";
-import Species from "./components/species";
-import People from "./components/people";
+//userMemo
+//userCallback
+//memo
+import React, {memo, useCallback, useMemo, useState} from "react"
 
-
-
-class App extends Component {
-
-
-    render() {
-
-
-    return (
-        <div className='mainBlock'>
-
-            <NavLink to={'/films'}>Films </NavLink>
-            <NavLink to={'/planets'}>Planets</NavLink>
-            <NavLink to={'/species'}>Species</NavLink>
-            <NavLink to={'/people'}>People</NavLink>
-
-
-            <Switch>
-                <Route path={'/films'}  exact={true} render={()=>{
-                    return <Films />
-                }}/>
-                <Route path={'/planets'}  exact={true} render={()=>{
-                    return <Planets />
-                }}/>
-                <Route path={'/species'}  exact={true} render={()=>{
-                    return <Species />
-                }}/>
-                <Route path={'/people'}  exact={true} render={()=>{
-                    return <People />
-                }}/>
-            </Switch>
+const Test = memo(()=>{
+    console.log('was render')
+    return (<div>
+            <h1>CLICKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK</h1>
 
     </div>
 
+    )
+})
+
+
+export default function App() {
+    const [counter, setCounter] = useState(0)
+    const [counter0, setCounter0]= useState([2,4,3,5,3,2,3,5,7,2,14])
+
+
+    const HandlerClick = useCallback(()=>{
+        console.log('test')
+    },[] )
+
+    const Sort = () => {
+        const counter = [...counter0]
+        counter.sort((a,b) => {
+            return a - b
+        } )
+       setCounter0(counter)
+
+    }
+
+    return (
+        <div>
+
+            <h2>Hello</h2>
+            <h3>{counter}</h3>
+            <button onClick={()=> setCounter( prev => prev + 1)}>Click</button>
+            <Test onClick={HandlerClick}/>
+            {
+                counter0.map((value) =>{
+                    return (
+                        <h1>{value}</h1>
+                    )
+                } )
+            }
+            <button onClick={Sort}>Sort</button>
+            <button onClick={()=>setCounter0([])}>Reset</button>
+        </div>
     );
-  }
-
 }
-
-export default withRouter(App);
