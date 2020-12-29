@@ -1,25 +1,39 @@
-
+import './App.css'
 //userMemo
 //userCallback
 //memo
 
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
+import React, {useCallback, useEffect} from "react";
+import {Header} from "./components/header/header";
+import {ProductList} from "./components/product-list/productList";
+import {services} from "./services";
 
 
 export default function App() {
-    const storeCounter = useSelector(({counter}) => counter)
-    const dispatch = useDispatch()
-    const inc = () => dispatch({type: 'INC_COUNTER'})
-    const dec = () => dispatch({type: 'DEC_COUNTER'})
-    const res = () => dispatch({type: 'RESET_COUNTER'})
+   const {cart,wishlist,products} = useSelector(
+       ({cart: {cart},wishlist:{wishlist},products:{products}}) =>
+           ({cart,wishlist,products}))
+
+    const {productService} = services
+
+    const fetchData = useCallback(async () => {
+        const data = await productService.getProducts()
+        console.log(data)
+    })
+
+
+
+    useEffect(()=>{
+        fetchData()
+    }, [])
 
     return (
-        <div>
-            <h1>{storeCounter}</h1>
+        <div className={'App'}>
+            <Header />
+            <ProductList />
             <h2>Hello</h2>
-            <button onClick={inc}>inc</button>
-            <button onClick={dec}>dec</button>
-            <button onClick={res}>reset</button>
+
         </div>
-    );
+    )
 }
