@@ -1,39 +1,31 @@
-import './App.css'
-//userMemo
-//userCallback
-//memo
-
-import { useSelector} from "react-redux";
-import React, {useCallback, useEffect} from "react";
-import {Header} from "./components/header/header";
-import {ProductList} from "./components/product-list/productList";
-import {services} from "./services";
+import {useDispatch, useSelector} from "react-redux";
+import {User} from "./components/User";
 
 
-export default function App() {
-   const {cart,wishlist,products} = useSelector(
-       ({cart: {cart},wishlist:{wishlist},products:{products}}) =>
-           ({cart,wishlist,products}))
+export default function App(props) {
 
-    const {productService} = services
+    const store = useSelector((state) => state)
+    const dispatch = useDispatch()
+    const onSubmit = (e) => {
+        e.preventDefault()
+        let name = e.target[0].value
+        let age = +e.target[1].value
 
-    const fetchData = useCallback(async () => {
-        const data = await productService.getProducts()
-        console.log(data)
-    })
+        dispatch({type: 'ADD', payload: {id: new Date().getTime(),name, age}})
 
-
-
-    useEffect(()=>{
-        fetchData()
-    }, [])
-
+    }
+    console.log(store)
     return (
-        <div className={'App'}>
-            <Header />
-            <ProductList />
-            <h2>Hello</h2>
-
+        <div>
+            <h2>HELLO</h2>
+        <form onSubmit={onSubmit}>
+            <input type="text"/>
+            <input type="number"/>
+            <button>Save</button>
+        </form>
+            {
+                store.map((value)=> <User key={value.id} store={value}/>)
+            }
         </div>
-    )
+    );
 }
